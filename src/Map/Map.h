@@ -32,6 +32,8 @@ private:
 
 public:
 
+	Map();
+
 	static int GetMapNumX();
 	static int GetMapNumY();
 
