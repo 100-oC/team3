@@ -1,6 +1,8 @@
 //ウィンドウを表示するプログラム（ひな形）
 
 #include "DxLib.h"	//DXライブラリのインクルード
+#include "MovePlayer/MovePlayer.h"
+#include "Input/Input.h"
 
 // define
 #define	SCREEN_SIZE_X	1280	// X方向の画面サイズを指定
@@ -30,6 +32,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
 
+
+
+	// プレイヤー情報
+	struct Player {
+		VECTOR pos = { 0.0f,0.0f };		// 座標
+		VECTOR speed = { 1.0f ,1.0f };	// 移動速度
+		int hndl;						// 画像ハンドル
+	};
+	Player player;
+
+	MovePlayerInit();
+
 	//-----------------------------------------
 
 	//ゲームメインループ
@@ -50,6 +64,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 
+		// プレイヤー処理
+		if (CheckHitKey(KEY_INPUT_D) != 0 || CheckHitKey(KEY_INPUT_RIGHT) != 0)	// 右移動
+			player.pos.x += player.speed.x;
+		if (CheckHitKey(KEY_INPUT_A) != 0 || CheckHitKey(KEY_INPUT_LEFT) != 0)	// 左
+			player.pos.x -= player.speed.x;
+		if (CheckHitKey(KEY_INPUT_W) != 0 || CheckHitKey(KEY_INPUT_UP) != 0)	// 上
+			player.pos.y -= player.speed.y;
+		if (CheckHitKey(KEY_INPUT_S) != 0 || CheckHitKey(KEY_INPUT_DOWN) != 0)	// 下
+			player.pos.y += player.speed.y;
+
+		// プレイヤー描画(仮)
+		DrawBox(player.pos.x, player.pos.y,
+			player.pos.x + 40.0f, player.pos.y + 40.0f, GetColor(0, 255, 0), true);
+
 		//-----------------------------------------
 		//ループの終わりに
 		//フリップ関数
@@ -59,6 +87,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//-----------------------------------------
 	//最後に１回だけやる処理をここに書く
+
 
 
 	//-----------------------------------------
