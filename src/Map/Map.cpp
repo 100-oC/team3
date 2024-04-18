@@ -16,14 +16,14 @@ int mapPly;
 
 //マップチップのファイルパス
 char map[MAP_AMX_NUM][255] = {
-	"data/map/.csv",
+	"data/map/map(仮).csv",
 };
 char colli[MAP_AMX_NUM][255] = {
-	"data/map/.csv",
+	"data/map/mapCollsion(仮).csv",
 };
 
 //マップチップイメージパス
-#define MAP_CHIP_IMG_PATH	"data/map/mapchip1_50×50_41.png"
+#define MAP_CHIP_IMG_PATH	"data/map/Map仮.png"
 
 Map::Map()
 {
