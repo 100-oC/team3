@@ -18,8 +18,7 @@ private:
 	static int mapNumX;
 	static int mapNumY;
 
-	//空の画像ハンドル
-	int skyHandle;
+	//空の画像ハンドル	int skyHandle;
 
 	// ファイルからのマップデータ
 	int** mapChipData2;

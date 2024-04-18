@@ -3,12 +3,14 @@
 #include"Title/Title.h"
 #include"Play/Play.h"
 #include"Result/Result.h"
+#include "../Map/Map.h"
 
 SCENE_ID g_CurrentSceneID = SCENE_ID_INIT_TITLE;
 
 Title title;
 Play play;
 Result result;
+Map map;
 
 void Scene()
 {
@@ -18,6 +20,7 @@ void Scene()
 	case SCENE_ID_INIT_TITLE:
 
 		title.Init();
+		//map.Init(int mapNum);
 
 		break;
 
@@ -26,6 +29,8 @@ void Scene()
 
 		title.Step();
 		title.Draw();
+		map.Step();
+		//map.Draw(int type);
 
 		break;
 
@@ -33,6 +38,7 @@ void Scene()
 	case SCENE_ID_FIN_TITLE:
 
 		title.Fin();
+		map.Fin();
 
 		break;
 

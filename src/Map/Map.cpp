@@ -31,7 +31,7 @@ Map::Map()
 	mapChipData2 = 0;
 	mapNumX = 0;
 	mapNumY = 0;
-	skyHandle = 0;
+	//skyHandle = 0;
 	// コンストラクタの処理
 	for (int i = 0; i < mapChipMaxNum; i++) {
 		imgHandle[i] = -1;
@@ -69,7 +69,7 @@ void Map::Draw(int type)
 	{
 	case 0:
 		//空の描画
-		DrawGraph(0, 0, skyHandle, true);
+		//DrawGraph(0, 0, skyHandle, true);
 
 		break;
 
