@@ -1,7 +1,7 @@
 //ウィンドウを表示するプログラム（ひな形）
 
 #include "DxLib.h"	//DXライブラリのインクルード
-#include "MovePlayer/MovePlayer.h"
+#include "Player/Player.h"
 #include "Input/Input.h"
 
 // define
@@ -33,7 +33,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//一番最初に１回だけやる処理をここに書く
 
 
-
+	///*
 	// プレイヤー情報
 	struct Player {
 		VECTOR pos = { 0.0f,0.0f };		// 座標
@@ -50,6 +50,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	player[0].pos = player[0].statepos;
 	player[1].pos = player[1].statepos;
+	//*/
 
 	//-----------------------------------------
 
