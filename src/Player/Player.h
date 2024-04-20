@@ -1,5 +1,7 @@
 #pragma once
 
+#define PATH1 "data/play/normal1_40.png"
+
 const int MAX_PLAYER = 2;	// プレイヤーの最大数
 
 class Player {
@@ -14,5 +16,9 @@ public:
 	void Init();
 	void Step();
 	void Draw();
+
+
+	VECTOR GetStatePos(int n);						// リスポーン地点取得
+	void SetStatepos(VECTOR statepos, int n);		// リスポーン地点設定
 
 };
