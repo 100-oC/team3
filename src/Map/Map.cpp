@@ -53,7 +53,7 @@ Map::Map()
 void Map::Init(int mapNum)
 {
 	//マップチップの読み込み
-	LoadDivGraph(MAP_CHIP_IMG_PATH, 41, 6, 7, MAPCHIP_SIZE, MAPCHIP_SIZE, imgHandle);
+	LoadDivGraph(MAP_CHIP_IMG_PATH, MAPCHIP_MAX_NUM, MAPCHIP_NUM_X, MAPCHIP_NUM_Y, MAPCHIP_SIZE, MAPCHIP_SIZE, imgHandle);
 
 	ReadFile(mapNum);
 	SetCollision(mapNum);
@@ -121,35 +121,35 @@ void Map::Draw(int type)
 // ファイルからの読み込み
 void Map::ReadFile(int Map)
 {
+	mapNumX = MAP_NUM_X;
+	mapNumY = MAP_NUM_Y;
+
+	//csvに入っている行数情報を取得
+	/*fscanf_s(fp, "%d", &mapNumX);
+	fgetc(fp);
+	fscanf_s(fp, "%d", &mapNumY);
+	fgetc(fp);*/
+
+	//Yのメモリ確保
+	mapChipData = new int* [mapNumY];
+	mapChipData2 = new int* [mapNumY];
+
+	mapCollisionData = new int* [mapNumY];
+
+	for (int i = 0; i < mapNumY; i++)
+	{
+		//Xのメモリ確保
+		mapChipData[i] = new int[mapNumX];
+		mapChipData2[i] = new int[mapNumX];
+
+		mapCollisionData[i] = new int[mapNumX];
+	}
+
 	FILE* fp;
 	fopen_s(&fp, map[Map], "r");
 
 	if (fp != NULL)
 	{
-		mapNumX = 0;
-		mapNumY = 0;
-
-		//csvに入っている行数情報を取得
-		fscanf_s(fp, "%d", &mapNumX);
-		fgetc(fp);
-		fscanf_s(fp, "%d", &mapNumY);
-		fgetc(fp);
-
-		//Yのメモリ確保
-		mapChipData = new int* [mapNumY];
-		mapChipData2 = new int* [mapNumY];
-
-		mapCollisionData = new int* [mapNumY];
-
-		for (int i = 0; i < mapNumY; i++)
-		{
-			//Xのメモリ確保
-			mapChipData[i] = new int[mapNumX];
-			mapChipData2[i] = new int[mapNumX];
-
-			mapCollisionData[i] = new int[mapNumX];
-		}
-
 		int mapIndexX = 0;
 		int mapIndexY = 0;
 
@@ -180,31 +180,32 @@ void Map::ReadFile(int Map)
 			}
 		}
 
-		mapIndexX = 0;
-		mapIndexY = 0;
+		//mapIndexX = 0;
+		//mapIndexY = 0;
 
-		//レイヤー２読み込み
-		while (true)
-		{
-			// 数値部分を読み込む
-			fscanf_s(fp, "%d", &mapChipData2[mapIndexY][mapIndexX]);
-			mapIndexX++;
+		////レイヤー２読み込み
+		//while (true)
+		//{
+		//	// 数値部分を読み込む
+		//	fscanf_s(fp, "%d", &mapChipData2[mapIndexY][mapIndexX]);
+		//	mapIndexX++;
 
-			// 「,」を飛ばすために読み込みを実行
-			char c = fgetc(fp);
+		//	// 「,」を飛ばすために読み込みを実行
+		//	char c = fgetc(fp);
 
-			// EOFの場合は読み込み終了
-			if (c == EOF)
-			{
-				break;
-			}
-			// 改行コードの場合は保存先を変更する
-			else if (c == '\n')
-			{
-				mapIndexY++;
-				mapIndexX = 0;
-			}
-		}
+		//	// EOFの場合は読み込み終了
+		//	if (c == EOF)
+		//	{
+		//		break;
+		//	}
+		//	// 改行コードの場合は保存先を変更する
+		//	else if (c == '\n')
+		//	{
+		//		mapIndexY++;
+		//		mapIndexX = 0;
+		//	}
+		//}
+
 		fclose(fp);
 	}
 }
@@ -281,6 +282,8 @@ void CheckWallCollision
 			if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
 				x - w / 2, y - h / 2, w, h))
 			{
+				//当たっていたら以下
+
 
 			}
 		}

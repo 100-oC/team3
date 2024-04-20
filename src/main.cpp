@@ -3,6 +3,7 @@
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "Player/Player.h"
 #include "Input/Input.h"
+#include "Scene/Scene.h"
 
 // define
 #define	SCREEN_SIZE_X	1280	// X方向の画面サイズを指定
@@ -39,7 +40,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		VECTOR pos = { 0.0f,0.0f };		// 座標
 		VECTOR statepos = { 0.0f,0.0f };// 初期地点(リスポーン地点座標)
 		VECTOR speed = { 0.0f ,0.0f };	// 移動速度
-		int hndl;						// 画像ハンドル
+		int hndl=-1;					// 画像ハンドル
 		bool living_flg = true;			// 生存しているかフラグ(trueで生存)
 	};
 	Player player[2];
@@ -51,6 +52,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	player[0].pos = player[0].statepos;
 	player[1].pos = player[1].statepos;
 	//*/
+
+
 
 	//-----------------------------------------
 
@@ -70,7 +73,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//ここからゲームの本体を書くことになる
 		//-----------------------------------------
 
-
+		//全体の流れ
+		Scene();
 
 		// 【プレイヤー処理】
 		// 1プレイヤー操作

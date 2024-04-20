@@ -1,6 +1,12 @@
 #pragma once
 
 const int MAPCHIP_SIZE = 50;	// マップチップ1枚のサイズ
+const int MAPCHIP_MAX_NUM = 4;	// マップチップの個数
+const int MAPCHIP_NUM_X = 2;	// マップチップXの個数
+const int MAPCHIP_NUM_Y = 2;	// マップチップYの個数
+
+const int MAP_NUM_X = 16;	//Xの表示数
+const int MAP_NUM_Y = 20;	//Yの表示数
 
 //マップチップの数
 const int mapChipMaxNum = 41;
@@ -41,7 +47,7 @@ public:
 
 	void Step();
 
-	// 描画
+	// 描画：背景→0,　プライヤーより下→1,　playerより上→2
 	void Draw(int type);
 	
 

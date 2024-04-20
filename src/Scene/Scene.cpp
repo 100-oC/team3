@@ -20,7 +20,7 @@ void Scene()
 	case SCENE_ID_INIT_TITLE:
 
 		title.Init();
-		//map.Init(int mapNum);
+		map.Init(0);
 
 		break;
 
@@ -30,7 +30,7 @@ void Scene()
 		title.Step();
 		title.Draw();
 		map.Step();
-		//map.Draw(int type);
+		map.Draw(1);
 
 		break;
 
