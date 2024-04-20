@@ -21,6 +21,7 @@ void Player::Init() {
 		player[i].m_living_flg = true;
 	}
 
+	// プレイヤーの初期向き
 	player[0].m_turn_flg = true;
 	player[1].m_turn_flg = false;
 
@@ -36,31 +37,31 @@ void Player::Step() {
 
 	// 1プレイヤー操作
 	if (CheckHitKey(KEY_INPUT_D) != 0) {	// 右移動
-		player[0].m_speed.x += 0.5f;
+		player[0].m_speed.x += SPEED;
 		player[0].m_turn_flg = true;
 	}
 	if (CheckHitKey(KEY_INPUT_A) != 0) {	// 左
-		player[0].m_speed.x -= 0.5f;
+		player[0].m_speed.x -= SPEED;
 		player[0].m_turn_flg = false;
 	}
 	if (CheckHitKey(KEY_INPUT_W) != 0)		// 上
-		player[0].m_speed.y -= 0.5f;
+		player[0].m_speed.y -= SPEED;
 	if (CheckHitKey(KEY_INPUT_S) != 0)		// 下
-		player[0].m_speed.y += 0.5f;
+		player[0].m_speed.y += SPEED;
 
 	// 2プレイヤー操作
 	if (CheckHitKey(KEY_INPUT_RIGHT) != 0) { // 右移動
-		player[1].m_speed.x += 0.5f;
+		player[1].m_speed.x += SPEED;
 		player[1].m_turn_flg = true;
 	}
 	if (CheckHitKey(KEY_INPUT_LEFT) != 0) {	 // 左
-		player[1].m_speed.x -= 0.5f;
+		player[1].m_speed.x -= SPEED;
 		player[1].m_turn_flg = false;
 	}
 	if (CheckHitKey(KEY_INPUT_UP) != 0)		 // 上
-		player[1].m_speed.y -= 0.5f;
+		player[1].m_speed.y -= SPEED;
 	if (CheckHitKey(KEY_INPUT_DOWN) != 0)	 // 下
-		player[1].m_speed.y += 0.5f;
+		player[1].m_speed.y += SPEED;
 
 	// プレイヤーの座標更新
 	for (int i = 0; i < 2; i++) {
@@ -70,18 +71,18 @@ void Player::Step() {
 
 	// プレイヤー加速度 最大値,最小値の設定
 	for (int i = 0; i < 2; i++) {
-		if (player[i].m_speed.x > 5.0f) {
-			player[i].m_speed.x = 5.0f;
+		if (player[i].m_speed.x > MAX_SPEED) {
+			player[i].m_speed.x = MAX_SPEED;
 		}
-		else if (player[i].m_speed.x < -5.0f) {
-			player[i].m_speed.x = -5.0f;
+		else if (player[i].m_speed.x < -MAX_SPEED) {
+			player[i].m_speed.x = -MAX_SPEED;
 		}
 
-		if (player[i].m_speed.y > 5.0f) {
-			player[i].m_speed.y = 5.0f;
+		if (player[i].m_speed.y > MAX_SPEED) {
+			player[i].m_speed.y = MAX_SPEED;
 		}
-		else if (player[i].m_speed.y < -5.0f) {
-			player[i].m_speed.y = -5.0f;
+		else if (player[i].m_speed.y < -MAX_SPEED) {
+			player[i].m_speed.y = -MAX_SPEED;
 		}
 	}
 

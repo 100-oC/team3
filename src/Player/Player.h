@@ -5,8 +5,9 @@
 #define MOVE1	"data/play/move1_40.png"
 #define MOVE2	"data/play/move2_40.png"
 
-const int MAX_PLAYER = 2;	// プレイヤーの最大数
-const float SPEED = 0.1f;	// プレイヤーの速度
+const int MAX_PLAYER = 2;		// プレイヤーの最大数
+const float SPEED = 0.25f;		// プレイヤーの速度
+const float MAX_SPEED = 5.0f;	// プレイヤーの最大速度
 
 class Player {
 private:
