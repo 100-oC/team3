@@ -27,7 +27,10 @@ private:
 	//空の画像ハンドル	int skyHandle;
 
 	// ファイルからのマップデータ
-	int** mapChipData2;
+	int mapChipData[MAP_NUM_Y][MAP_NUM_X];
+	int mapChipData2[MAP_NUM_Y][MAP_NUM_X];
+	
+	int mapCollisionData[MAP_NUM_Y][MAP_NUM_X];
 
 	//背景の画像ハンドル
 	int backHandle[2][15];
@@ -57,14 +60,10 @@ public:
 	void Fin();
 
 	void SetCollision(int Map);
-	
+
+	//全ての座標の生みの親
+	void AllPosInit();
 };
 
-// ファイルからのマップデータ
-extern int** mapChipData;
-//当たり判定の配置データ	1=地面,　2=左の壁,　3=右の壁
-extern int** mapCollisionData;
 extern Map mapData;
 
-//全ての座標の生みの親
-void AllPosInit();
