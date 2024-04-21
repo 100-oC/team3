@@ -6,7 +6,7 @@
 #include"../../TimeLimit/TimeLimit.h"
 
 Player player;
-Map map;
+Map mapData;
 TimeLimit timeLimit;
 
 //初期化
@@ -14,7 +14,7 @@ void Play::Init()
 {
 	// プレイヤー初期化
 	player.Init();
-	map.Init(0);
+	mapData.Init(0);
 	timeLimit.Init();
 
 	//通常処理へ移動
@@ -26,14 +26,14 @@ void Play::Step()
 {
 	// プレイヤー処理
 	player.Step();
-	map.Step();
+	mapData.Step();
 	timeLimit.Step();
 }
 
 //描画処理
 void Play::Draw()
 {
-	map.Draw(1);
+	mapData.Draw(1);
 	timeLimit.Draw();
 	// プレイヤー描画
 	player.Draw();
@@ -43,7 +43,7 @@ void Play::Draw()
 void Play::Fin()
 {
 	player.Fin();
-	map.Fin();
+	mapData.Fin();
 	timeLimit.Fin();
 
 	//次のシーンに移動

@@ -12,11 +12,14 @@ const float MAX_SPEED = 5.0f;	// プレイヤーの最大速度
 class Player {
 private:
 	VECTOR m_pos = { 0.0f,0.0f };		// 座標
+	VECTOR m_savePos = { 0.0f,0.0f };	// 一時保存用座標
 	VECTOR m_statepos = { 0.0f,0.0f };	// 初期地点(リスポーン地点座標)
 	VECTOR m_speed = { 0.0f ,0.0f };	// 移動速度
 	int m_hndl[2];						// 画像ハンドル
 	bool m_living_flg = true;			// 生存しているかフラグ(trueで生存)
 	bool m_turn_flg = false;			// プレイヤーの向き変更
+
+	bool m_up_flg = false;			// プレイヤーの上下
 
 	int m_animTime = 0;					// アニメの変更時間
 	int m_anim = 0;						// 現在のアニメ

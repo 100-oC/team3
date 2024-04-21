@@ -9,6 +9,8 @@ int Map::mapNumY;
 int mapPlx;
 int mapPly;
 
+int mapChipData[MAP_NUM_Y][MAP_NUM_X];
+
 //マップチップのファイルパス
 char map[MAP_AMX_NUM][255] = {
 	"data/map/map(仮).csv",
@@ -36,7 +38,7 @@ Map::Map()
 	mapNumY = 0;
 	//skyHandle = 0;
 	// コンストラクタの処理
-	for (int i = 0; i < mapChipMaxNum; i++) {
+	for (int i = 0; i < MAPCHIP_MAX_NUM; i++) {
 		imgHandle[i] = -1;
 	}
 	
@@ -209,29 +211,81 @@ void Map::SetCollision(int Map)
 
 //壁の当たり判定：当たり判定を取りたいやつの座標と横幅、縦幅
 void CheckWallCollision
-(float& x, float& y, float w, float h)
+(float& x, float& y, float w, float h,bool side,bool up)
 {
 	float mapX = 0;
 	float mapY = 0;
 
-	for (int indexY = 0; indexY < Map::GetMapNumY(); indexY++)
+	for (int indexY = 0; indexY < MAP_NUM_Y; indexY++)
 	{
-		for (int indexX = 0; indexX < Map::GetMapNumX(); indexX++)
+		for (int indexX = 0; indexX < MAP_NUM_X; indexX++)
 		{
+			//草むらか川（障害物）じゃ無かったら戻る
+			if (mapChipData[indexY][indexX] < MAP_LEAF)
+			{
+				continue;
+			}
+
 			//マップの変数を作る
 			mapX = (float)indexX * MAPCHIP_SIZE;
 			mapY = (float)indexY * MAPCHIP_SIZE;
 
 			if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
-				x - w / 2, y - h / 2, w, h))
+				x, y, w, h))
 			{
 				//当たっていたら以下
+				if (side)//左
+				{
+					x += mapX - (x + w);
+				}
+				else //右
+				{
+					x -= x - (mapX + MAPCHIP_SIZE);
+				}
 
+				if (up)
+				{
+					y += mapY - (y + h);
+					return;
+				}
 
 			}
+			
 		}
 	}
 }
+
+bool CheckWallCollision(VECTOR plPos, float w, float h )
+{
+	float mapX = 0;
+	float mapY = 0;
+
+	for (int indexY = 0; indexY < MAP_NUM_Y; indexY++)
+	{
+		for (int indexX = 0; indexX < MAP_NUM_X; indexX++)
+		{
+			//草むらか川（障害物）じゃ無かったら戻る
+			if (mapChipData[indexY][indexX] < MAP_LEAF)
+			{
+				continue;
+			}
+
+			//マップの変数を作る
+			mapX = (float)indexX * MAPCHIP_SIZE;
+			mapY = (float)indexY * MAPCHIP_SIZE;
+
+			if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
+				plPos.x, plPos.y, w, h))
+			{
+				return true;
+			}
+
+		}
+	}
+
+	return false;
+}
+
 
 int Map::GetMapNumX()
 {

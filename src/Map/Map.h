@@ -1,24 +1,30 @@
 #pragma once
 
 const int MAPCHIP_SIZE = 50;	// マップチップ1枚のサイズ
-const int MAPCHIP_MAX_NUM = 4;	// マップチップの個数
+const int MAPCHIP_MAX_NUM = 5;	// マップチップの個数
 const int MAPCHIP_NUM_X = 2;	// マップチップXの個数
-const int MAPCHIP_NUM_Y = 2;	// マップチップYの個数
+const int MAPCHIP_NUM_Y = 3;	// マップチップYの個数
 
 const int MAP_NUM_X = 26;	//Xの表示数
 const int MAP_NUM_Y = 15;	//Yの表示数
 
-//マップチップの数
-const int mapChipMaxNum = 41;
-
 const int MAP_AMX_NUM = 3;	//マップの数
+
+enum MAP_CHIP
+{
+	MAP_AREA1P,
+	MAP_GROUND,
+	MAP_AREA2P,
+	MAP_LEAF,
+	MAP_RIVER,
+};
 
 // マップクラス
 class Map
 {
 private:
 	//マップチップのハンドル
-	int imgHandle[mapChipMaxNum];
+	int imgHandle[MAPCHIP_MAX_NUM];
 
 	//マップチップの数
 	static int mapNumX;
@@ -27,7 +33,6 @@ private:
 	//空の画像ハンドル	int skyHandle;
 
 	// ファイルからのマップデータ
-	int mapChipData[MAP_NUM_Y][MAP_NUM_X];
 	int mapChipData2[MAP_NUM_Y][MAP_NUM_X];
 	
 	int mapCollisionData[MAP_NUM_Y][MAP_NUM_X];
@@ -66,4 +71,7 @@ public:
 };
 
 extern Map mapData;
+extern int mapChipData[MAP_NUM_Y][MAP_NUM_X];
 
+void CheckWallCollision(float& x, float& y, float w, float h, bool side,bool up);
+bool CheckWallCollision(VECTOR plPos, float w, float h);

@@ -1,6 +1,7 @@
 #include <Dxlib.h>
 #include "Player.h"
 #include "../Input/Input.h"
+#include"../Map/Map.h"
 
 #define ANIME_MAX 4		// アニメの最大数
 #define ANIME_TIME 13	// アニメの時間
@@ -19,6 +20,7 @@ void Player::Init() {
 	for (int i = 0; i < MAX_PLAYER; i++) {
 		player[i].m_pos = player[i].m_statepos;
 		player[i].m_living_flg = true;
+		player[i].m_up_flg = true;
 	}
 
 	// プレイヤーの初期向き
@@ -34,6 +36,11 @@ void Player::Init() {
 }
 
 void Player::Step() {
+	//座標の保存
+	for (int i = 0; i < 2; i++)
+	{
+		player[i].m_savePos = player[i].m_pos;
+	}
 
 	// 1プレイヤー操作
 	if (CheckHitKey(KEY_INPUT_D) != 0) {	// 右移動
@@ -44,10 +51,16 @@ void Player::Step() {
 		player[0].m_speed.x -= SPEED;
 		player[0].m_turn_flg = false;
 	}
-	if (CheckHitKey(KEY_INPUT_W) != 0)		// 上
+	if (CheckHitKey(KEY_INPUT_W) != 0)// 上
+	{		
 		player[0].m_speed.y -= SPEED;
+		player[0].m_up_flg = true;
+	}
 	if (CheckHitKey(KEY_INPUT_S) != 0)		// 下
+	{
 		player[0].m_speed.y += SPEED;
+		player[0].m_up_flg = false;
+	}
 
 	// 2プレイヤー操作
 	if (CheckHitKey(KEY_INPUT_RIGHT) != 0) { // 右移動
@@ -59,14 +72,20 @@ void Player::Step() {
 		player[1].m_turn_flg = false;
 	}
 	if (CheckHitKey(KEY_INPUT_UP) != 0)		 // 上
+	{
 		player[1].m_speed.y -= SPEED;
+		player[1].m_up_flg = true;
+	}
 	if (CheckHitKey(KEY_INPUT_DOWN) != 0)	 // 下
+	{
 		player[1].m_speed.y += SPEED;
+		player[0].m_up_flg = false;
+	}
 
 	// プレイヤーの座標更新
 	for (int i = 0; i < 2; i++) {
-		player[i].m_pos.x += player[i].m_speed.x;
-		player[i].m_pos.y += player[i].m_speed.y;
+		player[i].m_savePos.x += player[i].m_speed.x;
+		player[i].m_savePos.y += player[i].m_speed.y;
 	}
 
 	// プレイヤー加速度 最大値,最小値の設定
@@ -95,9 +114,27 @@ void Player::Step() {
 	// プレイヤーがキルされたとき
 	for (int i = 0; i < 2; i++) {
 		if (player[i].m_living_flg != true) {
-			player[i].m_pos = player[i].m_statepos;
+			player[i].m_savePos = player[i].m_statepos;
 			player[i].m_living_flg = true;
 		}
+	}
+
+	//当たり判定を取る
+	for (int i = 0; i < 2; i++)
+	{
+		if (CheckWallCollision(
+			player[i].m_savePos, 40, 40))
+		{
+			player[i].m_savePos = player[i].m_pos;
+			player[i].m_speed.x = 0.0f;
+			player[i].m_speed.y = 0.0f;
+		}
+	}
+
+	//座標の反映
+	for (int i = 0; i < 2; i++)
+	{
+		player[i].m_pos = player[i].m_savePos;
 	}
 
 }
