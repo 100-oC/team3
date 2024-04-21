@@ -3,7 +3,7 @@
 #include "../Input/Input.h"
 
 #define ANIME_MAX 4		// アニメの最大数
-#define ANIME_TIME 30	// アニメの時間
+#define ANIME_TIME 13	// アニメの時間
 
 Player player[MAX_PLAYER];
 
