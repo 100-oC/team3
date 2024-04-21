@@ -234,3 +234,17 @@ VECTOR Player::GetStatepos(int n) { return player[n].m_statepos; };
 void Player::SetStatepos(VECTOR statepos, int n) {
 	player[n].m_statepos = statepos;
 }
+
+
+int Player::GetCarrymeat(int n) { return player[n].m_carry_meat; };
+
+void Player::SetCarrymeat(int carrymeat, int n) {
+	player[n].m_carry_meat = carrymeat;
+}
+
+
+int Player::GetGoalmeat(int n) { return player[n].m_goal_meat; };
+
+void Player::SetGoalmeat(int goalmeat, int n) {
+	player[n].m_goal_meat = goalmeat;
+}
