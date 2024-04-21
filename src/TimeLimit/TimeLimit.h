@@ -1,6 +1,6 @@
 #pragma once
 
-const int TIME_LIMIT = 30;	//1ƒQ[ƒ€‚Ì§ŒÀŠÔ(•b)
+const int TIME_LIMIT = 60;	//1ƒQ[ƒ€‚Ì§ŒÀŠÔ(•b)
 const char TIME_IMAGE_PATH[255] = "data/play/number_44~64.png";	//‰æ‘œƒpƒX
 
 class TimeLimit
