@@ -128,11 +128,11 @@ void Title::MakeTitle()
 		size[TITLE_TITLE] = 1.0f;
 	}
 
-	if (size[TITLE_TITLE] >= 0.5f && size[TITLE_MEAT1] < 1.0f)
+	if (size[TITLE_TITLE] >= 1.0f && size[TITLE_MEAT1] < 1.0f)
 	{
 		size[TITLE_MEAT1] += 0.05f;
 	}
-	else if (size[TITLE_TITLE] >= 0.5f && size[TITLE_MEAT1] >= 1.0f)
+	else if (size[TITLE_TITLE] >= 1.0f && size[TITLE_MEAT1] >= 1.0f)
 	{
 		size[TITLE_MEAT1] = 1.0f;
 	}
