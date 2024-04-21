@@ -1,13 +1,7 @@
 //ウィンドウを表示するプログラム（ひな形）
 
 #include "DxLib.h"	//DXライブラリのインクルード
-#include "Player/Player.h"
-#include "Input/Input.h"
 #include "Scene/Scene.h"
-
-// define
-#define	SCREEN_SIZE_X	1280	// X方向の画面サイズを指定
-#define	SCREEN_SIZE_Y	720		// Y方向の画面サイズを指定
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -33,11 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
 
-
-
-	// プレイヤー初期化
-	Player player;
-	player.Init();
+	Input::Init();
 
 	//-----------------------------------------
 
@@ -53,18 +43,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//画面に表示されたものを初期化
 		ClearDrawScreen();
 
+		Input::Step();
+
 		//-----------------------------------------
 		//ここからゲームの本体を書くことになる
 		//-----------------------------------------
 
 		//全体の流れ
 		Scene();
-
-		// プレイヤー処理
-		player.Step();
-
-		// プレイヤー描画
-		player.Draw();
 
 		//-----------------------------------------
 		//ループの終わりに
