@@ -32,6 +32,7 @@ void Scene()
 		map.Step();
 		map.Draw(1);
 
+
 		break;
 
 		//タイトルシーン終了処理
