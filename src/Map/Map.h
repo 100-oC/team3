@@ -5,8 +5,8 @@ const int MAPCHIP_MAX_NUM = 4;	// マップチップの個数
 const int MAPCHIP_NUM_X = 2;	// マップチップXの個数
 const int MAPCHIP_NUM_Y = 2;	// マップチップYの個数
 
-const int MAP_NUM_X = 16;	//Xの表示数
-const int MAP_NUM_Y = 20;	//Yの表示数
+const int MAP_NUM_X = 26;	//Xの表示数
+const int MAP_NUM_Y = 15;	//Yの表示数
 
 //マップチップの数
 const int mapChipMaxNum = 41;
