@@ -23,6 +23,7 @@ void Player::Init() {
 		player[i].m_living_flg = true;
 		player[i].m_up_flg = true;
 		player[i].m_carry_meat = 10;
+		player[i].m_carry_speed = MEAT_MAX_SPEED;
 	}
 
 	// プレイヤーの初期向き
@@ -248,7 +249,8 @@ void Player::Draw() {
 		}
 	}
 
-
+	
+	/////////////////////////肉
 	// 運んでいる肉表示
 	for (int i = 0; i < MAX_PLAYER; i++) {
 		if (player[i].m_carry_meat > 0) {
@@ -257,24 +259,25 @@ void Player::Draw() {
 			player[i].m_carry_pos[0].y = player[i].m_pos.y + 20;
 			DrawGraph(player[i].m_carry_pos[0].x, player[i].m_carry_pos[0].y, player[i].m_meathndl, true);
 
-			//// お肉2個以上の時の処理
-			//for (int j = 1; j < player[i].m_carry_meat; j++) {
-			//	if (player[i].m_carry_pos[j - 1].x > player[i].m_carry_pos[j].x) {
-			//		player[i].m_carry_pos[j].x += player[i].m_carry_speed;
-			//	}
-			//	else if (player[i].m_carry_pos[j - 1].x < player[i].m_carry_pos[j].x) {
-			//		player[i].m_carry_pos[j].x -= player[i].m_carry_speed;
-			//	}
-			//	if (player[i].m_carry_pos[j - 1].y > player[i].m_carry_pos[j].y) {
-			//		player[i].m_carry_pos[j].y += player[i].m_carry_speed;
-			//	}
-			//	else if (player[i].m_carry_pos[j - 1].y < player[i].m_carry_pos[j].y) {
-			//		player[i].m_carry_pos[j].y -= player[i].m_carry_speed;
-			//	}
-			//	DrawGraph(player[i].m_carry_pos[j].x + 15, player[i].m_carry_pos[j].y + 20, player[i].m_meathndl, true);
-			//}
+			// お肉2個以上の時の処理
+			for (int j = 1; j < player[i].m_carry_meat; j++) {
+				if (player[i].m_carry_pos[j - 1].x > player[i].m_carry_pos[j].x) {
+					player[i].m_carry_pos[j].x += player[i].m_carry_speed / j;
+				}
+				else if (player[i].m_carry_pos[j - 1].x < player[i].m_carry_pos[j].x) {
+					player[i].m_carry_pos[j].x -= player[i].m_carry_speed / j;
+				}
+				if (player[i].m_carry_pos[j - 1].y > player[i].m_carry_pos[j].y) {
+					player[i].m_carry_pos[j].y += player[i].m_carry_speed / j;
+				}
+				else if (player[i].m_carry_pos[j - 1].y < player[i].m_carry_pos[j].y) {
+					player[i].m_carry_pos[j].y -= player[i].m_carry_speed / j;
+				}
+				DrawGraph(player[i].m_carry_pos[j].x, player[i].m_carry_pos[j].y, player[i].m_meathndl, true);
+			}
 		}
 	}
+	////////////////////////////////
 
 
 	// (仮)
