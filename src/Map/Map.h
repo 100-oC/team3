@@ -42,7 +42,6 @@ private:
 	//‘OŒi‚Ì‰æ‘œƒnƒ“ƒhƒ‹
 	int frontHandle;
 
-
 public:
 
 	Map();
@@ -75,3 +74,7 @@ extern int mapChipData[MAP_NUM_Y][MAP_NUM_X];
 
 void CheckWallCollision(float& x, float& y, float w, float h, bool side,bool up);
 bool CheckWallCollision(VECTOR plPos, float w, float h);
+bool CheckAreaCollision(VECTOR plPos, float w, float h,int plNum);
+
+extern VECTOR meatDefaultPos[100];
+extern int meatMaxNum;

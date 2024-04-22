@@ -2,18 +2,18 @@
 #include "Meat.h"
 
 
-void Meat::Init() {
-
-}
-
-void Meat::Step() {
-
-}
-
-void Meat::Draw() {
-
-}
-
-void Meat::Fin() {
-
-}
+//void Meat::Init() {
+//
+//}
+//
+//void Meat::Step() {
+//
+//}
+//
+//void Meat::Draw() {
+//
+//}
+//
+//void Meat::Fin() {
+//
+//}

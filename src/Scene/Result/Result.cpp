@@ -2,6 +2,8 @@
 #include"Result.h"
 #include"../Scene.h"
 
+int winner;
+
 //‰Šú‰»
 void Result::Init()
 {
@@ -29,7 +31,7 @@ void Result::Step()
 void Result::Draw()
 {
 	DrawGraph(0, 0, hndl[RESULT_GROUND], true);
-	DrawGraph(0, 0, hndl[RESULT_WINNER1P], true);
+	DrawGraph(0, 0, hndl[RESULT_WINNER1P + winner], true);
 }
 
 //I—¹ˆ—

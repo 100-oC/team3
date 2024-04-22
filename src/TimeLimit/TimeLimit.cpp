@@ -70,7 +70,7 @@ void TimeLimit::Draw(int type)
 	}
 	else if (type == 1&&!start)
 	{
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 * 0.3f);
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, (int)255 / 2);
 		DrawBox(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, GetColor(0, 0, 0), true);
 		//•\Ž¦‚ðŒ³‚É–ß‚·
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

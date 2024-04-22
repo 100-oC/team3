@@ -11,7 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetMainWindowText("ﾃｷﾄｰ");
 
 	//ウィンドウの状態を設定する
-	ChangeWindowMode(true);
+	ChangeWindowMode(false);
 
 	// 画面サイズを変更
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 32);

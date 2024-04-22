@@ -2,14 +2,14 @@
 
 #define MAX_MEAT 100	// èoåªÇ∑ÇÈì˜ÇÃç≈ëÂêî
 
-class Meat {
-private:
-	VECTOR m_pos[MAX_MEAT] = { 0.0f,0.0f };
-
-public:
-	void Init();
-	void Step();
-	void Draw();
-	void Fin();
-
-};
+//class Meat {
+//private:
+//	VECTOR m_pos[MAX_MEAT] = { 0.0f,0.0f };
+//
+//public:
+//	void Init();
+//	void Step();
+//	void Draw();
+//	void Fin();
+//
+//};

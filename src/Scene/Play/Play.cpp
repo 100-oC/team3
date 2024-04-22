@@ -12,9 +12,12 @@ TimeLimit timeLimit;
 //初期化
 void Play::Init()
 {
+	Effect::Init();
+	Effect::Load(EFFECT_TYPE_GET, 20);
+	mapData.Init(0);
+
 	// プレイヤー初期化
 	player.Init();
-	mapData.Init(0);
 	timeLimit.Init();
 
 	//通常処理へ移動
@@ -31,6 +34,7 @@ void Play::Step()
 	}
 	mapData.Step();
 	timeLimit.Step();
+	Effect::Step();
 }
 
 //描画処理
@@ -50,6 +54,8 @@ void Play::Fin()
 	player.Fin();
 	mapData.Fin();
 	timeLimit.Fin();
+
+	Effect::Fin();
 
 	//次のシーンに移動
 	g_CurrentSceneID = SCENE_ID_INIT_RESULT;

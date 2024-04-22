@@ -12,31 +12,31 @@ EffectInfo Effect::effectInfo[EFFECT_MAX_NUM];
 //エフェクトのファイルパス
 const char effectFilePath[EFFECT_TYPE_NUM][256] =
 {
-	"data/effect/ripple_96×96.png",	//波紋
+	"data/play/get_26×50.png",	//波紋
 };
 
 //各エフェクトのアニメ数
 const int effectAnimeImgNum[EFFECT_TYPE_NUM] =
 {
-	8,	//波紋
+	6,	//波紋
 };
 
 //各エフェクトの画像分割数 [0] = x, [1] = y
 const int effectImageSplitNum[EFFECT_TYPE_NUM][2] =
 {
-	{ 8, 1,},	//波紋
+	{ 3, 2,},	//波紋
 };
 
 //エフェクトの画像サイズ
 const int effectImageSize[EFFECT_TYPE_NUM][2] =
 {
-	{ 96, 96,},	//波紋
+	{ 26, 50,},	//波紋
 };
 
 //各エフェクトのアニメ画像切り替え時間
 const float effectChageTime[EFFECT_TYPE_NUM] =
 {
-	0.15f,	//波紋
+	0.1f,	//波紋
 };
 
 //==============================================================================================
@@ -153,7 +153,7 @@ void Effect::Draw(int type)
 			//システム
 		case 0: {
 
-			if (effectInfo[effect_index].type != EFFECT_TYPE_RIPPLE)
+			if (effectInfo[effect_index].type != EFFECT_TYPE_GET)
 			{
 				continue;
 			}

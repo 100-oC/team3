@@ -11,8 +11,8 @@
 
 const int MAX_PLAYER = 2;								// プレイヤーの最大数
 const float SPEED = 0.5f;								// プレイヤーの速度
-const float MAX_SPEED = 5.0f;							// プレイヤーの最大速度
-const float MEAT_MAX_SPEED = 4.5f;						// 肉の最大速度
+const float MAX_SPEED = 3.5f;							// プレイヤーの最大速度
+const float MEAT_MAX_SPEED = MAX_SPEED+1.5f;						// 肉の最大速度
 
 class Player {
 private:
@@ -36,10 +36,11 @@ private:
 
 
 	//////////////////肉
-	int m_meathndl;										// 運ぶ肉のハンドル
+	//int m_meathndl;										// 運ぶ肉のハンドル
 
-	VECTOR m_carry_pos[MAX_MEAT] = {0.0f,0.0f};			// 現在運んでいる肉の座標
-	float m_carry_speed= MEAT_MAX_SPEED;				// 現在運んでいる肉の速度
+	//VECTOR m_carry_pos[MAX_MEAT] = {0.0f,0.0f};			// 現在運んでいる肉の座標
+	//float m_carry_speed= MEAT_MAX_SPEED;				// 現在運んでいる肉の速度
+
 	//////////////////
 
 
@@ -50,16 +51,16 @@ public:
 	void Fin();
 
 
-	VECTOR Getpos(int n);								// 座標取得
+	VECTOR Getpos();								// 座標取得
 	void Setpos(VECTOR pos, int n);						// 座標設定	(nは配列の要素)
 
-	float GetXpos(int n);								// X座標取得
+	float GetXpos();								// X座標取得
 	void SetXpos(float x, int n);						// X座標設定
 
-	float GetYpos(int n);								// Y座標取得
+	float GetYpos();								// Y座標取得
 	void SetYpos(float y, int n);						// Y座標設定
 
-	VECTOR GetStatepos(int n);							// リスポーン地点取得
+	VECTOR GetStatepos();							// リスポーン地点取得
 	void SetStatepos(VECTOR statepos, int n);			// リスポーン地点設定
 
 	int GetCarrymeat(int n);							// 現在運んでいる肉の数取得
@@ -67,5 +68,33 @@ public:
 
 	int GetGoalmeat(int n);								// 現在自分のリス地に運んた肉の数取得
 	void SetGoalmeat(int goalmeat, int n);				// 現在自分のリス地に運んた肉の数設定
+	void AddGoalmeat(int add = 1) { m_goal_meat += add; }
 
+};
+
+//肉
+class Meat {
+private:
+	int m_meathndl;										// 運ぶ肉のハンドル
+
+	VECTOR m_carry_pos = { 0.0f,0.0f };					// 現在運んでいる肉の座標
+	float m_carry_speed = MEAT_MAX_SPEED;				// 現在運んでいる肉の速度
+
+	bool isUse = false;	//表示フラグ
+	bool isGet = false;	//入手フラグ
+
+	int getPlayer = -1;	//入手したPlayerの記録
+
+	float popTime = 0.0f;
+
+	void GetMeat();	//肉の取得
+	void Move(int meatNum);	//移動
+	void AreaInMeat();	//肉のポイント化
+	void PopMeat(int meatNum);	//再出現
+
+public:
+	void Init(int meatNum);
+	void Step(int meatNum);
+	void Draw();
+	void Fin();
 };

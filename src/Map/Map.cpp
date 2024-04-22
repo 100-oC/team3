@@ -11,6 +11,10 @@ int mapPly;
 
 int mapChipData[MAP_NUM_Y][MAP_NUM_X];
 
+int saveMapData[MAP_NUM_Y][MAP_NUM_X];
+VECTOR meatDefaultPos[100];
+int meatMaxNum;
+
 //マップチップのファイルパス
 char map[MAP_AMX_NUM][255] = {
 	"data/map/map(仮).csv",
@@ -31,6 +35,7 @@ Map::Map()
 			mapChipData[y][x] = -1;
 			mapChipData2[y][x] = -1;
 			mapCollisionData[y][x] = -1;
+			saveMapData[y][x] = -1;
 		}
 	}
 	
@@ -51,7 +56,6 @@ Map::Map()
 	}
 
 	frontHandle = -1;
-
 }
 
 
@@ -62,6 +66,12 @@ void Map::Init(int mapNum)
 
 	ReadFile(mapNum);
 	SetCollision(mapNum);
+
+	/*meatMaxNum = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		meatDefaultPos[i] = defaultPos;
+	}*/
 }
 
 void Map::Step()
@@ -123,6 +133,7 @@ void Map::Draw(int type)
 	}
 }
 
+
 // ファイルからの読み込み
 void Map::ReadFile(int Map)
 {
@@ -138,7 +149,20 @@ void Map::ReadFile(int Map)
 		while (true)
 		{
 			// 数値部分を読み込む
-			fscanf_s(fp, "%d", &mapChipData[mapIndexY][mapIndexX]);
+			fscanf_s(fp, "%d", &saveMapData[mapIndexY][mapIndexX]);
+
+			if (saveMapData[mapIndexY][mapIndexX] != 29)
+			{
+				mapChipData[mapIndexY][mapIndexX] = saveMapData[mapIndexY][mapIndexX];
+			}
+			else
+			{
+				meatDefaultPos[meatMaxNum].x = (float)mapIndexX * MAPCHIP_SIZE + (MAPCHIP_SIZE / 2);
+				meatDefaultPos[meatMaxNum].y = (float)mapIndexY * MAPCHIP_SIZE + (MAPCHIP_SIZE / 2);
+				mapChipData[mapIndexY][mapIndexX] = MAP_GROUND;
+				meatMaxNum++;
+			}
+
 			mapIndexX++;
 
 			// 「,」を飛ばすために読み込みを実行
@@ -274,7 +298,7 @@ bool CheckWallCollision(VECTOR plPos, float w, float h )
 			mapX = (float)indexX * MAPCHIP_SIZE;
 			mapY = (float)indexY * MAPCHIP_SIZE;
 
-			if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
+			if (Collision::Rect(mapX+10, mapY, (float)MAPCHIP_SIZE-10, (float)MAPCHIP_SIZE-20,
 				plPos.x, plPos.y, w, h))
 			{
 				return true;
@@ -286,6 +310,64 @@ bool CheckWallCollision(VECTOR plPos, float w, float h )
 	return false;
 }
 
+bool CheckAreaCollision(VECTOR plPos, float w, float h, int plNum)
+{
+	float mapX = 0;
+	float mapY = 0;
+
+	if (plNum == 1)
+	{
+		for (int indexY = 0; indexY < MAP_NUM_Y; indexY++)
+		{
+			for (int indexX = 0; indexX < MAP_NUM_X; indexX++)
+			{
+				//草むらか川（障害物）じゃ無かったら戻る
+				if (mapChipData[indexY][indexX] != MAP_AREA1P)
+				{
+					continue;
+				}
+
+				//マップの変数を作る
+				mapX = (float)indexX * MAPCHIP_SIZE;
+				mapY = (float)indexY * MAPCHIP_SIZE;
+
+				if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
+					plPos.x-w/2, plPos.y-h/2, w, h))
+				{
+					return true;
+				}
+
+			}
+		}
+	}
+	else
+	{
+		for (int indexY = 0; indexY < MAP_NUM_Y; indexY++)
+		{
+			for (int indexX = 0; indexX < MAP_NUM_X; indexX++)
+			{
+				//草むらか川（障害物）じゃ無かったら戻る
+				if (mapChipData[indexY][indexX] != MAP_AREA2P)
+				{
+					continue;
+				}
+
+				//マップの変数を作る
+				mapX = (float)indexX * MAPCHIP_SIZE;
+				mapY = (float)indexY * MAPCHIP_SIZE;
+
+				if (Collision::Rect(mapX, mapY, (float)MAPCHIP_SIZE, (float)MAPCHIP_SIZE,
+					plPos.x - w / 2, plPos.y - h / 2, w, h))
+				{
+					return true;
+				}
+
+			}
+		}
+	}
+
+	return false;
+}
 
 int Map::GetMapNumX()
 {

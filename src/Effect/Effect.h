@@ -13,7 +13,7 @@ const int EFFECT_ANIME_MAX_NUM = 10;
 //エフェクトの種類
 enum EFFECT_TYPE
 {
-	EFFECT_TYPE_RIPPLE = 0,		//波紋
+	EFFECT_TYPE_GET = 0,		//波紋
 
 	//=============ｹﾞｰﾑ=============
 
