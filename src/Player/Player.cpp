@@ -3,6 +3,7 @@
 #include "../Input/Input.h"
 #include"../Map/Map.h"
 #include "../Item/Meat/Meat.h"
+#include"../Scene/Scene.h"
 
 #define ANIME_MAX 4		// アニメの最大数
 #define ANIME_TIME 13	// アニメの時間
@@ -169,6 +170,39 @@ void Player::Step() {
 		}
 	}
 
+	/////////////////////////肉
+	// 運んでいる肉表示
+	for (int i = 0; i < MAX_PLAYER; i++) {
+		if (player[i].m_carry_meat > 0) {
+
+			player[i].m_carry_pos[0].x = player[i].m_pos.x + 20;
+			player[i].m_carry_pos[0].y = player[i].m_pos.y + 50;
+
+			// お肉2個以上の時の処理
+			for (int j = 1; j < player[i].m_carry_meat; j++) {
+
+				if (GetDistance(
+					player[i].m_carry_pos[j - 1].x, player[i].m_carry_pos[j - 1].y,
+					player[i].m_carry_pos[j].x, player[i].m_carry_pos[j].y) >= 20)
+				{
+					if (player[i].m_carry_pos[j - 1].x > player[i].m_carry_pos[j].x) {
+						player[i].m_carry_pos[j].x += player[i].m_carry_speed / j;
+					}
+					else if (player[i].m_carry_pos[j - 1].x < player[i].m_carry_pos[j].x) {
+						player[i].m_carry_pos[j].x -= player[i].m_carry_speed / j;
+					}
+					if (player[i].m_carry_pos[j - 1].y > player[i].m_carry_pos[j].y) {
+						player[i].m_carry_pos[j].y += player[i].m_carry_speed / j;
+					}
+					else if (player[i].m_carry_pos[j - 1].y < player[i].m_carry_pos[j].y) {
+						player[i].m_carry_pos[j].y -= player[i].m_carry_speed / j;
+					}
+
+				}
+			}
+		}
+	}
+	////////////////////////////////
 }
 
 void Player::Draw() {
@@ -255,25 +289,19 @@ void Player::Draw() {
 	for (int i = 0; i < MAX_PLAYER; i++) {
 		if (player[i].m_carry_meat > 0) {
 
-			player[i].m_carry_pos[0].x = player[i].m_pos.x + 15;
-			player[i].m_carry_pos[0].y = player[i].m_pos.y + 20;
-			DrawGraph(player[i].m_carry_pos[0].x, player[i].m_carry_pos[0].y, player[i].m_meathndl, true);
+			DrawRotaGraph(
+				player[i].m_carry_pos[0].x,
+				player[i].m_carry_pos[0].y,
+				1.5f,0.0f,
+				player[i].m_meathndl, true);
 
 			// お肉2個以上の時の処理
 			for (int j = 1; j < player[i].m_carry_meat; j++) {
-				if (player[i].m_carry_pos[j - 1].x > player[i].m_carry_pos[j].x) {
-					player[i].m_carry_pos[j].x += player[i].m_carry_speed / j;
-				}
-				else if (player[i].m_carry_pos[j - 1].x < player[i].m_carry_pos[j].x) {
-					player[i].m_carry_pos[j].x -= player[i].m_carry_speed / j;
-				}
-				if (player[i].m_carry_pos[j - 1].y > player[i].m_carry_pos[j].y) {
-					player[i].m_carry_pos[j].y += player[i].m_carry_speed / j;
-				}
-				else if (player[i].m_carry_pos[j - 1].y < player[i].m_carry_pos[j].y) {
-					player[i].m_carry_pos[j].y -= player[i].m_carry_speed / j;
-				}
-				DrawGraph(player[i].m_carry_pos[j].x, player[i].m_carry_pos[j].y, player[i].m_meathndl, true);
+				DrawRotaGraph(
+					player[i].m_carry_pos[j].x,
+					player[i].m_carry_pos[j].y,
+					1.5f,0.0f,
+					player[i].m_meathndl, true);
 			}
 		}
 	}
