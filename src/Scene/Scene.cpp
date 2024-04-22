@@ -17,7 +17,9 @@ void Scene()
 		//タイトルシーン初期化
 	case SCENE_ID_INIT_TITLE:
 
+		Sound::Init();
 		title.Init();
+		Sound::Bgm::Play(BGM_TITLE);
 
 		break;
 
@@ -34,6 +36,7 @@ void Scene()
 	case SCENE_ID_FIN_TITLE:
 
 		title.Fin();
+		Sound::Bgm::StopSound(BGM_TITLE);
 
 		break;
 
@@ -43,6 +46,7 @@ void Scene()
 	case SCENE_ID_INIT_PLAY:
 
 		play.Init();
+		Sound::Bgm::Play(BGM_PLAY);
 
 		break;
 		//プレイシーン通常処理
@@ -56,6 +60,7 @@ void Scene()
 	case SCENE_ID_FIN_PLAY:
 
 		play.Fin();
+		Sound::Bgm::StopSound(BGM_PLAY);
 
 		break;
 
@@ -65,6 +70,7 @@ void Scene()
 	case SCENE_ID_INIT_RESULT:
 
 		result.Init();
+		Sound::Bgm::Play(BGM_RESULT);
 
 		break;
 
@@ -80,6 +86,7 @@ void Scene()
 	case SCENE_ID_FIN_RESULT:
 
 		result.Fin();
+		Sound::Bgm::StopSound(BGM_RESULT);
 
 		break;
 	}

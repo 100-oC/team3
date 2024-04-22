@@ -200,6 +200,7 @@ void Title::StartGame()
 	if (Input::Key::Push(KEY_INPUT_SPACE))
 	{
 		g_CurrentSceneID = SCENE_ID_FIN_TITLE;
+		Sound::Se::Play(SE_SYSTEM);
 	}
 
 }
