@@ -9,7 +9,9 @@ private:
 	int imageHandle[10];	//画像ハンドル
 
 	float timeCount;	//時間計測
-	//int currentTime;	//現在の時間
+	int currentTime;	//現在の時間
+
+	bool start;
 
 public:
 	//初期化
@@ -19,10 +21,12 @@ public:
 	void Step();
 
 	//描画
-	void Draw();
+	void Draw(int type=0);
 
 	//終了処理
 	void Fin();
+
+	bool GetStart() { return start; }
 };
 
-extern int currentTime;	//現在の時間
+//extern int currentTime;	//現在の時間

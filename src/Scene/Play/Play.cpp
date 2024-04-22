@@ -24,8 +24,11 @@ void Play::Init()
 //通常処理
 void Play::Step()
 {
-	// プレイヤー処理
-	player.Step();
+	if (timeLimit.GetStart())
+	{
+		// プレイヤー処理
+		player.Step();
+	}
 	mapData.Step();
 	timeLimit.Step();
 }
@@ -37,6 +40,8 @@ void Play::Draw()
 	timeLimit.Draw();
 	// プレイヤー描画
 	player.Draw();
+
+	timeLimit.Draw(1);
 }
 
 //終了処理
