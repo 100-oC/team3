@@ -374,9 +374,12 @@ const int POP_TIME = 3;
 
 void Meat::Init(int meatNum)
 {
+	isUse = false;
+	isGet = false;
+
 	m_carry_speed = MEAT_MAX_SPEED;
 	m_meathndl = LoadGraph(MEAT);
-
+	m_carry_pos = DEFAULT_VECTOR;
 	m_carry_pos = meatDefaultPos[meatNum];
 
 	if (m_carry_pos.x != 0)

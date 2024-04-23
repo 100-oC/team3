@@ -2,6 +2,7 @@
 #include"Map.h"
 #include"../MovePlayer/MovePlayer.h"
 #include"../Collision/Collision.h"
+#include"../Scene/Scene.h"
 
 int Map::mapNumX;
 int Map::mapNumY;
@@ -66,12 +67,6 @@ void Map::Init(int mapNum)
 
 	ReadFile(mapNum);
 	SetCollision(mapNum);
-
-	/*meatMaxNum = 0;
-	for (int i = 0; i < 100; i++)
-	{
-		meatDefaultPos[i] = defaultPos;
-	}*/
 }
 
 void Map::Step()
@@ -192,6 +187,11 @@ void Map::ReadFile(int Map)
 //ƒ}ƒbƒvŒãˆ—
 void Map::Fin()
 {
+	meatMaxNum = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		meatDefaultPos[i] = DEFAULT_VECTOR;
+	}
 }
 
 //“–‚½‚è”»’è‚Ì“Ç‚Ýž‚Ý
